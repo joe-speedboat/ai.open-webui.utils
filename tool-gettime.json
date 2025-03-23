@@ -1,0 +1,33 @@
+[
+  {
+    "id": "gettime",
+    "user_id": "8d2acda6-7eb0-48ce-90fa-db5c82910c57",
+    "name": "getTime",
+    "content": "from datetime import datetime\nfrom pydantic import BaseModel, Field\nimport pytz\n\n\nclass Tools:\n    class Valves(BaseModel):\n        timezone: str = Field(\n            default=\"Europe/Zurich\",\n            description=\"The timezone to use for date and time retrieval\",\n        )\n\n    def __init__(self, valves: \"Tools.Valves\" = None):\n        self.valves = valves or self.Valves()\n\n    def get_current_date(self) -> str:\n        \"\"\"\n        Get the current date in the specified timezone.\n        :return: The current date as a formatted string.\n        \"\"\"\n        tz = pytz.timezone(self.valves.timezone)\n        current_date = datetime.now(tz).strftime(\"%A, %B %d, %Y\")\n        return (\n            f\"Today's date in {self.valves.timezone.replace('_', ' ')}: {current_date}\"\n        )\n\n    def get_current_time(self) -> str:\n        \"\"\"\n        Get the current time in the specified timezone.\n        :return: The current time as a formatted string.\n        \"\"\"\n        tz = pytz.timezone(self.valves.timezone)\n        current_time = datetime.now(tz).strftime(\"%H:%M\")  # 24-hour format\n        return f\"The current time in {self.valves.timezone.replace('_', ' ')} is {current_time}.\"\n\n\n# Usage Example\n# tools = Tools(valves=Tools.Valves(timezone=\"Europe/Berlin\"))\n# print(tools.get_current_date())\n# print(tools.get_current_time())\n",
+    "specs": [
+      {
+        "name": "get_current_date",
+        "description": "Get the current date in the specified timezone.",
+        "parameters": {
+          "properties": {},
+          "type": "object"
+        }
+      },
+      {
+        "name": "get_current_time",
+        "description": "Get the current time in the specified timezone.",
+        "parameters": {
+          "properties": {},
+          "type": "object"
+        }
+      }
+    ],
+    "meta": {
+      "description": "Get the current time",
+      "manifest": {}
+    },
+    "access_control": null,
+    "updated_at": 1742756641,
+    "created_at": 1742754362
+  }
+]
