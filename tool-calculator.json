@@ -1,0 +1,39 @@
+[
+  {
+    "id": "calculator",
+    "user_id": "8d2acda6-7eb0-48ce-90fa-db5c82910c57",
+    "name": "Calculator",
+    "content": "\"\"\"\ntitle: Calculator\nauthor: open-webui\nauthor_url: https://github.com/open-webui\nfunding_url: https://github.com/open-webui\nversion: 0.1.0\n\"\"\"\n\nimport os\nimport requests\nfrom datetime import datetime\n\n\nclass Tools:\n    def __init__(self):\n        pass\n\n    # Add your custom tools using pure Python code here, make sure to add type hints\n    # Use Sphinx-style docstrings to document your tools, they will be used for generating tools specifications\n    # Please refer to function_calling_filter_pipeline.py file from pipelines project for an example\n\n    def calculator(self, equation: str) -> str:\n        \"\"\"\n        Calculate the result of an equation.\n        :param equation: The equation to calculate.\n        \"\"\"\n\n        # Avoid using eval in production code\n        # https://nedbatchelder.com/blog/201206/eval_really_is_dangerous.html\n        try:\n            result = eval(equation)\n            return f\"{equation} = {result}\"\n        except Exception as e:\n            print(e)\n            return \"Invalid equation\"\n",
+    "specs": [
+      {
+        "name": "calculator",
+        "description": "Calculate the result of an equation.",
+        "parameters": {
+          "properties": {
+            "equation": {
+              "description": "The equation to calculate.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "equation"
+          ],
+          "type": "object"
+        }
+      }
+    ],
+    "meta": {
+      "description": "This tool is an example implementation of a  custom calculator tool for evaluating mathematical equations in Python.",
+      "manifest": {
+        "title": "Calculator",
+        "author": "open-webui",
+        "author_url": "https://github.com/open-webui",
+        "funding_url": "https://github.com/open-webui",
+        "version": "0.1.0"
+      }
+    },
+    "access_control": null,
+    "updated_at": 1742755751,
+    "created_at": 1742755751
+  }
+]
